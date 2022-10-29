@@ -23,6 +23,26 @@ function init() {
 
     }
   }
+
+  // change the volume on the slider
+  let scale = document.getElementById("volume");
+  let soundImg = document.getElementById("volume-controls").querySelector("img");
+  let changeSound = function() {
+    if(scale.value == 0) {
+      soundImg.src = "assets/icons/volume-level-0.svg";
+    }
+    else if(scale.value >= 1 && scale.value < 33) {
+      soundImg.src = "assets/icons/volume-level-1.svg";
+    }
+    else if(scale.value >= 33 && scale.value < 67) {
+      soundImg.src = "assets/icons/volume-level-2.svg";
+    }
+    else if(scale.value >= 67) {
+      soundImg.src = "assets/icons/volume-level-3.svg";
+    } 
+    audio.volume = (scale.value / 100.0);
+  }
+
   // play audio out loud
   audio.volume = 0.5;
   let button = document.querySelector('button');
@@ -35,6 +55,7 @@ function init() {
     }
   }
   select.addEventListener('change', changeImg);
+  scale.addEventListener('soundChange', changeSound);
   button.addEventListener('click', play);
 }
 
